@@ -2,32 +2,32 @@ package projeto;
 
 public class Simulador {
 
- 	// Relógio de simulação - variável que contém o valor do tempo em cada instante
+ 	// Relï¿½gio de simulaï¿½ï¿½o - variï¿½vel que contï¿½m o valor do tempo em cada instante
     private double instante;
-    // Médias das distribuições de chegadas e de atendimento no serviço
+    // Mï¿½dias das distribuiï¿½ï¿½es de chegadas e de atendimento no serviï¿½o
 	private double media_cheg, media_serv;
-	// Número de clientes que vão ser atendidos
+	// Nï¿½mero de clientes que vï¿½o ser atendidos
 	private int n_clientes;
-	// Serviço - pode haver mais do que um num simulador
+	// Serviï¿½o - pode haver mais do que um num simulador
     private Servico servico;
-    // Lista de eventos - onde ficam registados todos os eventos que vão ocorrer na simulação
-    // Cada simulador só tem uma
+    // Lista de eventos - onde ficam registados todos os eventos que vï¿½o ocorrer na simulaï¿½ï¿½o
+    // Cada simulador sï¿½ tem uma
 	private ListaEventos lista;
 
     // Construtor
     public Simulador(double chegada, double temp_servico, int caixas) {
-		// Inicialização de parâmetros do simulador
+		// Inicializaï¿½ï¿½o de parï¿½metros do simulador
         media_cheg = chegada;
 		media_serv = 1.5;
 		n_clientes = 100;
-		// Inicialização do relógio de simulação
+		// Inicializaï¿½ï¿½o do relï¿½gio de simulaï¿½ï¿½o
 		instante = 0;
-		// Criação do serviço
+		// Criaï¿½ï¿½o do serviï¿½o
 		servico = new Servico (this, temp_servico, caixas);
-		// Criação da lista de eventos
+		// Criaï¿½ï¿½o da lista de eventos
 		lista = new ListaEventos(this);
 		// Agendamento da primeira chegada
-        // Se não for feito, o simulador não tem eventos para simular
+        // Se nï¿½o for feito, o simulador nï¿½o tem eventos para simular
 		insereEvento (new Chegada(instante, this));
     }
 
@@ -35,21 +35,21 @@ public class Simulador {
         public static void main(String[] args) {
             // Cria um simulador e
             Simulador s = new Simulador(1,1.5,1);
-            // põe-o em marcha
+            // pï¿½e-o em marcha
             s.executa();
         }
 
-    // Método que insere o evento e1 na lista de eventos
+    // Mï¿½todo que insere o evento e1 na lista de eventos
 	void insereEvento (Evento e1){
 		lista.insereEvento (e1);
 	}
 
-    // Método que actualiza os valores estatísticos do simulador
+    // Mï¿½todo que actualiza os valores estatï¿½sticos do simulador
 	private void act_stats(){
 		servico.act_stats();
 	}
 
-    // Método que apresenta os resultados de simulação finais
+    // Mï¿½todo que apresenta os resultados de simulaï¿½ï¿½o finais
 	private void relat (){
     	System.out.println();
     	System.out.println("------- Resultados finais -------");
@@ -57,35 +57,35 @@ public class Simulador {
 		servico.relat();
 	}
 
-    // Método executivo do simulador
+    // Mï¿½todo executivo do simulador
 	public void executa (){
 		Evento e1;
-		// Enquanto não atender todos os clientes
+		// Enquanto nï¿½o atender todos os clientes
 		while (servico.getAtendidos() < n_clientes){
-    	//	lista.print();  // Mostra lista de eventos - desnecessário; é apenas informativo
-			e1 = (Evento)(lista.removeFirst());  // Retira primeiro evento (é o mais iminente) da lista de eventos
-			instante = e1.getInstante();         // Actualiza relógio de simulação
-			act_stats();                         // Actualiza valores estatísticos
+    	//	lista.print();  // Mostra lista de eventos - desnecessï¿½rio; ï¿½ apenas informativo
+			e1 = (Evento)(lista.removeFirst());  // Retira primeiro evento (ï¿½ o mais iminente) da lista de eventos
+			instante = e1.getInstante();         // Actualiza relï¿½gio de simulaï¿½ï¿½o
+			act_stats();                         // Actualiza valores estatï¿½sticos
 			e1.executa(servico);                 // Executa evento
 		};
-		relat();  // Apresenta resultados de simulação finais
+		relat();  // Apresenta resultados de simulaï¿½ï¿½o finais
 	}
 
-    // Método que devolve o instante de simulação corrente
+    // Mï¿½todo que devolve o instante de simulaï¿½ï¿½o corrente
     public double getInstante() {
         return instante;
     }
 
-    // Método que devolve a média dos intervalos de chegada
+    // Mï¿½todo que devolve a mï¿½dia dos intervalos de chegada
     public double getMedia_cheg() {
         return media_cheg;
     }
 
-    // Método que devolve a média dos tempos de serviço
+    // Mï¿½todo que devolve a mï¿½dia dos tempos de serviï¿½o
     public double getMedia_serv() {
         return media_serv;
     }
 
 }
 
-//test
+// TESTE AGORA EM CAPS
